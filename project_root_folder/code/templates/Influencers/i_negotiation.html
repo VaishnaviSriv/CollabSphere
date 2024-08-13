@@ -1,0 +1,63 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title %}Influencer Negotiation Pg{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/s_inf_request.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    {% if requests|length == 0 %}
+			<div class="text-center alert alert-danger" role="alert" style=" animation: pulse 1s infinite">
+				No Requests Found
+			</div>
+	{% else %}
+    <h1 class="text-center mt-5 p-0 m-0" style="color: black; font-family: ROBOTO; text-decoration: underline"><b>NEGOTIATION REQUESTS</b></h1>
+    <div class="main-container" style="margin-top: 60px">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="container mt-6 p-0">
+            {% for request in requests %}
+                <div class="request mt-4">
+                    <div class="request-details">
+                        <div class="detail">
+                            <span id="R">Campaign Name:</span>
+                            <span>{{request.campaign.title}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Ad Title:</span>
+                            <span>{{request.title}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Sponsor Name:</span>
+                            <span>{{request.sender.name}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Counter Amount:</span>
+                            <span>{{request.amount}}</span>
+                        </div>
+                    </div>
+                    {% if request.campaign.status.name == "INACTIVE" %}
+                        <span class="badge bg-dark">INACTIVE</span>
+                    {% elif request.sender.flagged == True or request.campaign.flagged == True %}
+                        <span class="badge bg-dark">BLOCKED</span>
+                     {% else %}
+                    <div class="request-actions">
+                        <a href='{{url_for("i_negotiation_form", request_id=request.request_id)}}' class="action-btn view-btn" style="text-decoration: none;">Negotiate</a>
+                        <a href="{{ url_for('update_status', request_id=request.request_id, status='ACCEPTED') }}" class="action-btn accept-btn" style="text-decoration: none;">Accept</a>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

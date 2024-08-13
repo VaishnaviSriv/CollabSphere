@@ -1,0 +1,54 @@
+/* body {
+    padding-top: 56px;
+    background-color:  rgb(196, 125, 191);
+}
+.navbar-brand {
+    color: crimson;
+    font-weight: bolder;
+    font-size: 30px;
+} */
+
+form {
+    width: 100%;
+    margin-top: 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 1em;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+label {
+    margin-bottom: .5em;
+    color: #333333;
+}
+
+.form input[type="text"]:read-only,
+.form input[type="number"]:read-only {
+    background-color: #f0f0f0; /* Light grey color */
+    border-color: #c4bfbf; /* Slightly darker grey for border */
+} 
+
+input[type="text"], input[type="number"] {
+    border: 1px solid #ccc;
+    padding: .5em;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    padding: 0.7em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}

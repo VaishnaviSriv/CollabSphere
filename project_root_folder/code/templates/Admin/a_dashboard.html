@@ -1,0 +1,303 @@
+{% extends "Admin/a_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block name%}Admin{% endblock %}
+
+{% block sphere%}CollabSphere{% endblock %}
+
+{% block content %}
+		{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+		<div class="container">
+			<!-- Numerical User Distribution -->
+			<div class="row mb-4">
+				<div class="col-4">
+					<!-- card -->
+					<div class="card h-100 card-lg">
+						<!-- card body -->
+						<div class="card-body p-6">
+							<!-- heading -->
+							<div
+								class="d-flex justify-content-between align-items-center mb-6"
+							>
+								<div>
+									<h4 class="mb-0 fs-5">Sponsors</h4>
+								</div>
+								<div
+									class="icon-shape icon-md bg-light-danger text-dark-danger rounded-circle"
+								>
+									<i class="bi bi-currency-rupee fs-5"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div class="lh-1">
+								<h1 class="mb-2 fw-bold fs-2">{{ num_sponsors }}</h1>
+								<span>No. of sponsors</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<!-- card -->
+					<div class="card h-100 card-lg">
+						<!-- card body -->
+						<div class="card-body p-6">
+							<!-- heading -->
+							<div
+								class="d-flex justify-content-between align-items-center mb-6"
+							>
+								<div>
+									<h4 class="mb-0 fs-5">Influencers</h4>
+								</div>
+								<div
+									class="icon-shape icon-md bg-light-danger text-dark-danger rounded-circle"
+								>
+									<i class="bi bi-currency-rupee fs-5"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div class="lh-1">
+								<h1 class="mb-2 fw-bold fs-2">{{ num_influencers }}</h1>
+								<span>No. of influencers</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<!-- card -->
+					<div class="card h-100 card-lg">
+						<!-- card body -->
+						<div class="card-body p-6">
+							<!-- heading -->
+							<div
+								class="d-flex justify-content-between align-items-center mb-6"
+							>
+								<div>
+									<h4 class="mb-0 fs-5">Campaigns</h4>
+								</div>
+								<div
+									class="icon-shape icon-md bg-light-danger text-dark-danger rounded-circle"
+								>
+									<i class="bi bi-currency-rupee fs-5"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div class="lh-1">
+								<h1 class="mb-2 fw-bold fs-2">{{ num_campaigns }}</h1>
+								<span>No. of campaigns</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Graphical user distribution -->
+			<div class="row mb-4">
+				<div class="col-12">
+					<!-- card -->
+					<div class="card h-100 card-lg">
+						<!-- card body -->
+						<div class="card-body p-6">
+							<h3 class="mb-4 fs-5">User Data</h3>
+							<div>
+								<!-- text -->
+								<div class="mb-3">
+									<!-- text -->
+									<div
+										class="d-flex align-items-center justify-content-between"
+									>
+										<h5 class="fs-6">Sponsors</h5>
+									</div>
+									<div>
+										<!-- progressbar -->
+										<div class="progress bg-info-soft" style="height: 6px">
+											<div
+												class="progress-bar bg-info"
+												role="progressbar"
+												aria-label="Example 1px high"
+												style="width: {% if total_entities == 0 %} 0 {% else %} {{ (num_sponsors / total_entities) * 100 }}{% endif %}%"
+												aria-valuenow="88"
+												aria-valuemin="0"
+												aria-valuemax="100"
+											></div>
+										</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div
+										class="d-flex align-items-center justify-content-between"
+									>
+										<h5 class="fs-6">Influencers</h5>
+									</div>
+									<!-- main wrapper -->
+									<div>
+										<!-- progressbar -->
+										<div class="progress bg-light-primary" style="height: 6px">
+											<div
+												class="progress-bar bg-primary"
+												role="progressbar"
+												aria-label="Example 1px high"
+												style="width: {% if total_entities == 0 %} 0 {% else %} {{ (num_influencers / total_entities) * 100 }}{% endif %}%"
+												aria-valuenow="25"
+												aria-valuemin="0"
+												aria-valuemax="100"
+											></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Graphical flag distribution -->
+			<div class="row mb-4">
+				<div class="col-12">
+					<!-- card -->
+					<div class="card h-100 card-lg">
+						<!-- card body -->
+						<div class="card-body p-6">
+							<h3 class="mb-4 fs-5">Flag Data</h3>
+							<div>
+								<!-- text -->
+								<div class="mb-3">
+									<!-- text -->
+									<div
+										class="d-flex align-items-center justify-content-between"
+									>
+										<h5 class="fs-6">Sponsors</h5>
+										<span class="me-1 text-dark"
+											>{{ num_flagged_sponsors }}</span
+										>
+									</div>
+									<div>
+										<!-- progressbar -->
+										<div class="progress bg-info-soft" style="height: 6px">
+											<div
+												class="progress-bar bg-info"
+												role="progressbar"
+												aria-label="Example 1px high"
+												style="width: {% if total_flagged_entities == 0 %} 0 {% else %} {{ (num_flagged_sponsors / total_flagged_entities) * 100 }}{% endif %}%"
+												aria-valuenow="88"
+												aria-valuemin="0"
+												aria-valuemax="100"
+											></div>
+										</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div
+										class="d-flex align-items-center justify-content-between"
+									>
+										<h5 class="fs-6">Influencers</h5>
+										<span class="me-1 text-dark"
+											>{{ num_flagged_influencers }}</span
+										>
+									</div>
+									<!-- main wrapper -->
+									<div>
+										<!-- progressbar -->
+										<div class="progress bg-light-primary" style="height: 6px">
+											<div
+												class="progress-bar bg-primary"
+												role="progressbar"
+												aria-label="Example 1px high"
+												style="width: {% if total_flagged_entities == 0 %} 0 {% else %} {{ (num_flagged_influencers / total_flagged_entities) * 100 }}{% endif %}%"
+												aria-valuenow="25"
+												aria-valuemin="0"
+												aria-valuemax="100"
+											></div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<!-- text -->
+									<div
+										class="d-flex align-items-center justify-content-between"
+									>
+										<h5 class="fs-6">Campaigns</h5>
+										<span class="me-1 text-dark"
+											>{{ num_flagged_campaigns }}</span
+										>
+									</div>
+									<div>
+										<!-- progressbar -->
+										<div class="progress bg-light-danger" style="height: 6px">
+											<div
+												class="progress-bar bg-danger"
+												role="progressbar"
+												aria-label="Example 1px high"
+												style="width: {% if total_flagged_entities == 0 %} 0 {% else %} {{ (num_flagged_campaigns / total_flagged_entities) * 100 }}{% endif %}%"
+												aria-valuenow="45"
+												aria-valuemin="0"
+												aria-valuemax="100"
+											></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Recent campaigns -->
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card h-100 card-lg">
+						<!-- heading -->
+						<div class="p-3">
+							<h3 class="mb-0 fs-5">Recent Campaigns</h3>
+						</div>
+						<div class="card-body p-0">
+							<!-- table -->
+							<div class="table-responsive">
+								<table
+									class="table table-centered table-borderless text-nowrap table-hover"
+								>
+									<thead class="bg-light">
+										<tr>
+											<th scope="col">Sr.No.</th>
+											<th scope="col">Sponsor Name</th>
+											<th scope="col">Campaign Title</th>
+											<th scope="col">Niche</th>
+											<th scope="col">Budget Amount</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col">Visibility</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for campaign in recent_campaigns %}
+										<tr>
+											<td>{{ loop.index }}</td>
+											<td>{{ campaign.user.name }}</td>
+											<td>{{ campaign.title }}</td>
+											<td>
+												{% if campaign.niche == '' %} All {% else %} {{
+												campaign.niche }}{% endif %}
+											</td>
+											<td>₹ {{ campaign.budget }}</td>
+											<td>{{ (campaign.start_date).date() }}</td>
+											<td>{{ (campaign.end_date).date() }}</td>
+											<td>{{ campaign.visibility.name }}</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% endblock %}

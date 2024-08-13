@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(196, 125, 191);
+}
+.form-container {
+    background-color: rgb(253, 253, 253);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-container label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.form-container input, .form-container textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+.form-container textarea {
+    height: 100px;
+}
+.form-container .form-check {
+    margin-top: 10px;
+}
+.form-container .btn {
+    margin-top: 20px;
+}

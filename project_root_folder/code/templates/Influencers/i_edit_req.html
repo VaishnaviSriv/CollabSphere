@@ -1,0 +1,52 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title %}Influencer request form{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/s_dashboard.css" />{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+		<div class="container mt-4 p-0">
+			<div class="row">
+				<h1 class="text-center mt-5 p-0 m-0" style="color: black; font-family: ROBOTO; text-decoration: underline"><b>EDIT REQUEST</b></h1>
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+				{% for category, message in messages %}
+				<div class="alert alert-{{ category }}">{{ message }}</div>
+				{% endfor %}
+				{% endif %}
+				{% endwith %}
+				<div
+					class="container mt-4 p-3"
+					style="background-color: rgb(253, 253, 253); border-radius: 10px"
+				>
+					<form action="{{url_for('i_edit_request', request_id = adrequest.request_id)}}" method="POST">
+						
+						<label for="ctitle" class="form-label fw-bold">Campaign</label>
+						<input style=' background-color: #f0f0f0; border-color: #c4bfbf;' type="text" id="ctitle" name="ctitle" value="{{adrequest.campaign.title}}" readonly/>
+						
+						<label for="title" class="form-label fw-bold">Ad title</label>
+						<input type="text" id="title" name="title" value="{{adrequest.title}}"/>
+
+						<label for="desc" class="form-label fw-bold">Description</label>
+						<textarea id="desc" name="description"/>{{adrequest.description}}</textarea>
+
+						<label for="budget" class="form-label fw-bold">Budget </label>
+						<input type="number"id="budget" name="budget" value="{{adrequest.amount}}" style="margin-right: 10px; padding: 5px"/>
+
+						<label for="deadline" class="form-label fw-bold">Deadline</label>
+						<input type="date" id="deadline" name="deadline" value="{{adrequest.deadline.date()}}"/>
+                        <br>
+                        <br>
+
+						<button class="btn btn-dark btn-lg" type="submit">
+              Update
+            </button>
+					</form>
+				</div>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+body {
+    padding-top: 56px;
+    background-color:  rgb(196, 125, 191);
+}
+.navbar-brand {
+    color: crimson;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+/* .navbar-nav .nav-link.active {
+    font-weight: bold;
+} */
+.welcome h2 {
+    font-family: 'SansSerif', sans-serif;
+    font-weight: bolder;
+    color: #333;
+}
+.request {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}
+.request-details {
+    margin-bottom: 10px;
+}
+.request-details .detail {
+    margin-bottom: 10px;
+}
+.request-details .detail span:first-child {
+    font-weight: bold;
+    color: #555;
+}
+.request-details .detail span:last-child {
+    color: #333;
+}
+
+.action-btn {
+    display: inline-block;
+    width: 100px; /* Fixed width for both buttons */
+    padding: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.search-form {
+    margin-top: 15px;
+}
+
+.alert-danger {
+    font-size: 30px;
+    border-color: brown;
+    font-family: 'Times New Roman';
+    font-weight: bold;
+    align-self: center;
+}

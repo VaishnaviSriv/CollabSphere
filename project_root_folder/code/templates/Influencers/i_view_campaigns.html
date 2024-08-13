@@ -1,0 +1,61 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title %}Influencer View Campaigns{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/i_view_campaign.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    <div class="container dashboard-container">
+        <div class="row col-12 welcome-row">
+            {% if campaigns|length == 0 %}
+            <div class="col-12 col-md-6 offset-md-3 mt-5">
+                <div class="card card-custom">
+                    <div class="card-body text-center">
+                        <h3 class="text-center w-100" style="color: crimson; font-size: 40px;">No Campaigns Available</h3>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <h1 class="text-center mt-5 p-0 m-0" style="color: black; font-family: ROBOTO; text-decoration: underline"><b>ACTIVE CAMPAIGNS</b></h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+             <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for campaign in campaigns %}
+                        <div class="col">
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h3 class="card-title">Campaign {{ loop.index }}</h3>
+                                    <h6 class="card-text fw-bold">Title: {{ campaign.title }}</h6>
+                                    <p class="card-text fw-bold">Description: {{ campaign.description }}</p>
+                                    <p class="card-text fw-bold">Start Date: {{ (campaign.start_date).date() }}</p> 
+                                    <p class="card-text fw-bold">End Date: {{ (campaign.end_date).date() }}</p> 
+                                    <p class="card-text fw-bold">Budget:₹ {{ campaign.budget }}</p>
+                                    <p class="card-text fw-bold">Niche: {{ campaign.niche }}</p>
+                                    {% if campaign.status.name == 'INACTIVE'%}
+                                    <span class="badge bg-danger">INACTIVE</span>
+                                    {% elif campaign.flagged == True  or campaign.user.flagged == True%}
+                                     <span class="badge bg-dark">FLAGGED</span>
+                                    {% else %}
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <a href="{{ url_for('inf_request_form', campaign_id=campaign.campaign_id) }}" class="btn btn-success btn-sm ms-auto" style='background-color: #4c10cd'>Request</a>
+                                        <!-- <a href="#" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to ignore this campaign?');">Ignore</a> -->
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

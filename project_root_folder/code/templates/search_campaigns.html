@@ -1,0 +1,70 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title %}Search Campaigns{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/search_campaigns.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+     <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="container mt-5 p-0">
+        <section class="welcome p-6">
+           {% if results %}
+            <h2>Search Results for "<b style="color: white;">{{ search_term }}</b>"</h2>
+            <div class="search-results mt-3">
+                {% for campaign in results %}
+                <div class="campaign">
+                    <div class="campaign-details fw-bold">
+                        <div class="detail">
+                            <span id="R">Sponsor Name:</span>
+                            <span>{{ campaign.user.name }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"> Campaign Title:</span>
+                            <span>{{ campaign.title }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Description</span>
+                            <span>{{ campaign.description }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Budget</span>
+                            <span>₹ {{ campaign.budget }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Start Date</span>
+                            <span>{{ (campaign.start_date).date() }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">End Date</span>
+                            <span>{{ (campaign.end_date).date() }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Visibility</span>
+                            <span>{{ campaign.visibility.name }}</span>
+                        </div>
+                    </div>
+                    <div class="request-btn-container">
+                        <a href = "{{ url_for('inf_sent_request', campaign_id=campaign.campaign_id)}}" class="btn btn-primary request-btn fw-bold">Request</a>
+                    </div>
+                </div>
+                {% endfor %}
+                <hr>
+            </div>
+            {% else %}
+            <div class="alert  alert-warning text-center mt-4" role="alert"  style=" animation: pulse 1s infinite">
+                <strong>No Campaigns found matching "{{ search_term }}"</strong>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

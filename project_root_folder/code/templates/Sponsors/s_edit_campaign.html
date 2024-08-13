@@ -1,0 +1,96 @@
+{% extends "Sponsors/s_base.html" %}
+
+{% block title %}Edit Campaign{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/s_dashboard.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-5 mb-3" style="color: rgb(4, 4, 4); font-family: 'roboto'; font-weight: bolder; text-decoration: underline">Edit Campaign</h1>
+        <form action="{{ url_for('update_campaign', campaign_id=campaign.campaign_id) }}" method="POST">
+        <div class="container-profile bg-white p-5 shadow rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+
+                            
+                            <label for="ctitle" class="form-label mt-2 fw-semibold">Campaign title:</label>
+                            <input type="text" id="ctitle" name="campaign_title" value="{{campaign.title}}" class="form-control" required />
+    
+                            <label for="desc" class="form-label mt-2 fw-semibold">Description:</label>
+                            <textarea id="desc" name="description" rows="3" class="form-control" required>{{campaign.description}}</textarea>
+    
+                            <label for="budget" class="form-label mt-2 fw-semibold">Budget: </label>
+                            <input type="number" id="budget" name="budget" value="{{campaign.budget}}" class="form-control" required /> <br />
+                            <br />
+                            <label for="start-date" class="form-label mt-2 fw-semibold">Start Date: </label>
+                            <input type="date" id="start-date" name="start_date" value="{{(campaign.start_date).date()}}" class="form-control" required /> 
+    
+                            <label for="end-date" class="form-label mt-2 fw-semibold">End Date: </label>
+                            <input type="date" id="end-date" name="end_date" value="{{(campaign.end_date).date()}}" class="form-control" required />
+                            <br />
+                            <br />
+                            
+                            <label for="visibility" class="form-label mt-2 fw-semibold">Visibility:</label>
+                            <select class="form-select" id="visibility" name="visibility" required>
+                                <option value="{{campaign.visibility.value}}">{{campaign.visibility.name}}</option>
+                                {% if campaign.visibility.name == 'PUBLIC' %}
+                                <option value="private">PRIVATE</option>
+                                {% else %}
+                                <option value="public">PUBLIC</option>
+                                {% endif %}
+                            </select>
+                            
+                            
+                            <label for="status" class="form-label mt-2 fw-semibold">Status:</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="{{campaign.status.value}}">{{campaign.status.name}}</option>
+                                {% if campaign.status.name == 'ACTIVE' %}
+                                <option value="inactive">INACTIVE</option>
+                                {% else %}
+                                <option value="active">ACTIVE</option>
+                                {% endif %}
+                            </select>
+                            
+                            <label for="niche" class="form-label mt-2 fw-semibold">Niche</label>
+                            <select class="form-select" id="niche" name="niche">
+                                <option value="">Select</option>
+                                <option value="Fashion" {% if campaign.niche == "Fashion" %}selected{% endif %}>Fashion</option>
+                                <option value="Beauty" {% if campaign.niche == "Beauty" %}selected{% endif %}>Beauty</option>
+                                <option value="Fitness and Health" {% if campaign.niche == "Fitness and Health" %}selected{% endif %}>Fitness and Health</option>
+                                <option value="Travel" {% if campaign.niche == "Travel" %}selected{% endif %}>Travel</option>
+                                <option value="Food" {% if campaign.niche == "Food" %}selected{% endif %}>Food</option>
+                                <option value="Technology" {% if campaign.niche == "Technology" %}selected{% endif %}>Technology</option>
+                                <option value="Gaming" {% if campaign.niche == "Gaming" %}selected{% endif %}>Gaming</option>
+                                <option value="Lifestyle" {% if campaign.niche == "Lifestyle" %}selected{% endif %}>Lifestyle</option>
+                                <option value="Parenting and Family" {% if campaign.niche == "Parenting and Family" %}selected{% endif %}>Parenting and Family</option>
+                                <option value="Education" {% if campaign.niche == "Education" %}selected{% endif %}>Education</option>
+                                <option value="Finance" {% if campaign.niche == "Finance" %}selected{% endif %}>Finance</option>
+                                <option value="DIY and Crafts" {% if campaign.niche == "DIY and Crafts" %}selected{% endif %}>DIY and Crafts</option>
+                                <option value="Photography and Videography" {% if campaign.niche == "Photography and Videography" %}selected{% endif %}>Photography and Videography</option>
+                                <option value="Art and Design" {% if campaign.niche == "Art and Design" %}selected{% endif %}>Art and Design</option>
+                                <option value="Music" {% if campaign.niche == "Music" %}selected{% endif %}>Music</option>
+                                <option value="Motivation and Self-Help" {% if campaign.niche == "Motivation and Self-Help" %}selected{% endif %}>Motivation and Self-Help</option>
+                                <option value="Pets" {% if campaign.niche == "Pets" %}selected{% endif %}>Pets</option>
+                                <option value="Sustainability and Eco-Friendly Living" {% if campaign.niche =="Sustainability and Eco-Friendly Living" %}selected{% endif %}>Sustainability and Eco-Friendly Living</option>
+                            </select>
+                            
+                            <button type="submit" class="btn btn-dark mt-3">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title %}Influencer Sponsor Requests{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/i_sponsor.css" />{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+        <div class="container mt-4 p-0">
+            <h1 class="text-center mt-5 p-0 m-0" style="color: black; font-family: ROBOTO; text-decoration: underline"><b>SPONSOR-SENT REQUESTS</b></h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+             <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <section class="pending_requests">
+                <h2 class="text-start" style="color: rgb(251, 251, 251); font-family: 'Times New Roman'; font-weight: bolder;">Pending Requests:</h2>
+                {% for request in pending_requests %}
+                <div class="request mt-4">
+                    <div class="request-details">
+                        <div class="detail">
+                            <span id="R"><b>Sponsor:</b></span>
+                            <span>{{request.sender.name}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Campaign:</b></span>
+                            <span>{{request.campaign.title}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Campaign Niche:</b></span>
+                            <span>{{request.campaign.niche}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Ad Title:</b></span>
+                            <span>{{ request.title }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Description:</b></span>
+                            <p>{{ request.description }}</p>
+                        </div>
+                        <div>
+                            <span id="R"><b>Amount:</b></span>
+                            <span style="margin-right: 10px">{{ request.amount }}</span>
+                        </div>
+                    </div>
+                    {% if request.campaign.status.name == 'INACTIVE' %}
+                        <span class="badge bg-dark">INACTIVE</span>
+                    {% elif request.sender.flagged == True or request.campaign.flagged == True %}
+                        <span class="badge bg-dark">BLOCKED</span>
+                    {% else %}
+                    <div class="request-actions">
+                        <a href="{{ url_for('i_negotiation_form', request_id=request.request_id) }}" class="btn btn-primary action-btn">Negotiate</a>
+                        <a href="{{ url_for('update_status', request_id=request.request_id, status='ACCEPTED') }}" class="view-btn action-btn">Accept</a>
+                        <a href="{{ url_for('update_status', request_id=request.request_id, status='REJECTED') }}" class="reject-btn action-btn">Reject</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+        <hr style="height: 3px; background-color: black;">
+    
+        <!-- Accepted Requests -->
+        <div class="container mt-4 p-0">
+            <section class="accepted_requests">
+                <h2 class="text-start" style="color: rgb(11, 93, 5); font-family: 'Times New Roman'; font-weight: bolder;">Accepted Requests:</h2>
+                {% for request in accepted_requests %}
+                <div class="request mt-4">
+                    <div class="request-details">
+                        <div class="detail">
+                            <span id="R"><b>Sponsor:</b></span>
+                            <span>{{request.sender.name}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Campaign:</b></span>
+                            <span>{{request.campaign.title}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Campaign Niche:</b></span>
+                            <span>{{request.campaign.niche}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Ad Title:</b></span>
+                            <span>{{ request.title }}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R"><b>Description:</b></span>
+                            <p>{{ request.description }}</p>
+                        </div>
+                        <div>
+                            <span id="R"><b>Amount:</b></span>
+                            <span style="margin-right: 10px">{{ request.amount }}</span>
+                        </div>
+                    </div>
+                    {% if request.campaign.status.name == 'INACTIVE' %}
+                        <span class="badge bg-dark">INACTIVE</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+        <hr style="height: 3px; background-color: black;">
+    
+       <!-- Rejected Requests -->
+<div class="container mt-4 p-0">
+    <section class="rejected_requests">
+        <h2 class="text-start" style="color: rgb(170, 13, 13); font-family: 'Times New Roman'; font-weight: bolder;">Rejected Requests:</h2>
+        {% for request in rejected_requests %}
+        <div class="request mt-4">
+            <div class="request-details">
+                <div class="detail">
+                    <span id="R"><b>Sponsor:</b></span>
+                    <span>{{request.sender.name}}</span>
+                </div>
+                <div class="detail">
+                    <span id="R"><b>Campaign:</b></span>
+                    <span>{{request.campaign.title}}</span>
+                </div>
+                <div class="detail">
+                    <span id="R"><b>Campaign Niche:</b></span>
+                    <span>{{request.campaign.niche}}</span>
+                </div>
+                <div class="detail">
+                    <span id="R"><b>Ad Title:</b></span>
+                    <span>{{ request.title }}</span>
+                </div>
+                <div class="detail">
+                    <span id="R"><b>Description:</b></span>
+                    <p>{{ request.description }}</p>
+                </div>
+                <div class="detail">
+                    <span id="R"><b>Amount:</b></span>
+                    <span>{{ request.amount }}</span>
+                </div>
+            </div>
+        </div>
+        {% if not loop.last %}
+        <hr class="my-4" style='color:rgb(196, 125, 191)'>
+        {% endif %}
+        {% endfor %}
+    </section>
+</div>
+
+<hr style="height: 3px; background-color: black;">
+
+
+        <div class="container mt-4 p-0">
+          <section class="rejected_requests">
+              <h2 class="text-start" style="color: black; font-family: 'Times New Roman'; font-weight: bolder;">Completed Requests:</h2>
+              {% for request in completed_requests %}
+              <div class="request mt-4">
+                  <div class="request-details">
+                      <div class="detail">
+                          <span id="R"><b>Sponsor:</b></span>
+                          <span>{{request.sender.name}}</span>
+                      </div>
+                      <div class="detail">
+                          <span id="R"><b>Campaign:</b></span>
+                          <span>{{request.campaign.title}}</span>
+                      </div>
+                      <div class="detail">
+                          <span id="R"><b>Campaign Niche:</b></span>
+                          <span>{{request.campaign.niche}}</span>
+                      </div>
+                      <div class="detail">
+                          <span id="R"><b>Ad Title:</b></span>
+                          <span>{{ request.title }}</span>
+                      </div>
+                      <div class="detail">
+                          <span id="R"><b>Description:</b></span>
+                          <p>{{ request.description }}</p>
+                      </div>
+                      <div>
+                          <span id="R"><b>Amount:</b></span>
+                          <span>{{ request.amount }}</span>
+                      </div>
+                  </div>
+              {% endfor %}
+          </section>
+      </div>
+    {% endblock %}
+    

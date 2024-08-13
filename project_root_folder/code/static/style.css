@@ -1,0 +1,52 @@
+body{
+    background-color: bisque;
+}
+
+.container {
+    width: 100%;
+    height: 50%;
+}
+
+.navbar-brand {
+    color: azure;
+}
+
+form {
+    width: 28%;
+    margin: auto;
+    padding-top: 150px;
+}
+
+.alert {
+  animation: fadeOut 2s forwards;
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+
+.bg {
+    background-color: whitesmoke;
+}
+
+.btn-primary {
+    background-color: cadetblue;
+    border: none;
+}
+.link-opacity-10 {
+    opacity: 0.1;
+    color: blue;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.btn-secondary {
+    width: 265px;
+}
+
+.text-center-sl {
+    font-family: cursive;
+}
+

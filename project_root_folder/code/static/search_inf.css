@@ -1,0 +1,48 @@
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.influencer {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+.influencer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.influencer-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.detail {
+    display: flex;
+    flex-direction: column;
+}
+.detail span:first-child {
+    font-weight: bold;
+    color: #4c10cd;
+}
+.detail span:last-child {
+    font-size: 1.1em;
+}
+hr {
+    margin: 20px 0;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* Optional: Add custom CSS to further style the alert */
+.alert-warning {
+    font-family: Roboto;
+    background-color: #dad390;
+    color: #333;
+    font-size: 2em;
+    border: 1px solid #070707;
+}
+

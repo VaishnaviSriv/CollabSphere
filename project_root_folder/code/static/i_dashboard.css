@@ -1,0 +1,80 @@
+body {
+    background-color: rgb(196, 125, 191);
+    padding-top: 150px;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+.navbar-brand {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+.welcome {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.container {
+    margin-top: 50px;
+}
+.profile-page {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+}
+.profile-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+.profile-role {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+.profile-ranking {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 25px;
+}
+.profile-details-frame {
+    background: #f9f9f9;
+    border: 2px solid rgb(196, 125, 191);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.profile-details .detail {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.profile-details .detail-title {
+    font-weight: bold;
+    color: #333;
+    width: 120px;
+    flex-shrink: 0;
+}
+.profile-details .detail-value {
+    color: #555;
+    flex-grow: 1;
+}
+
+.form-horizontal input[type="text"]:read-only,
+.form-horizontal input[type="number"]:read-only {
+    background-color: #f0f0f0; /* Light grey color */
+    border-color: #c4bfbf; /* Slightly darker grey for border */
+}

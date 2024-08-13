@@ -1,0 +1,73 @@
+{% extends "Sponsors/s_base.html" %}
+
+{% block title %}View Campaign{% endblock %}
+
+{% block css%}<link rel="stylesheet" href="/static/s_view_campaign.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card campaign-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="card-title">Campaign Details</h2>
+                <span class="badge bg-dark">{{campaign.visibility.name}}</span>
+            </div>
+            <div class="card-body">
+                <div class="campaign-info">
+                    <div class="info-item">
+                        <span class="info-label">Campaign Name:</span>
+                        <span class="info-value">{{campaign.title}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Campaign Description:</span>
+                        <span class="info-value">{{campaign.description}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Start Date:</span>
+                        <span class="info-value">{{(campaign.start_date).date()}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">End Date:</span>
+                        <span class="info-value">{{(campaign.end_date).date()}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Budget:</span>
+                        <span class="info-value">₹ {{campaign.budget}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span class="info-value">{{campaign.status.name}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Niche:</span>
+                        <span class="info-value">{{campaign.niche}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Total no. of requests:</span>
+                        <span class="info-value">{{count}}</span>
+                    </div>
+                    <div class="info-item">
+                        <a href="{{url_for('s_campaign_status', campaign_id=campaign.campaign_id)}}" class="btn btn-link fw-bold">Change Status</a>
+                    </div>
+                </div>
+            </div>
+            {% if campaign.flagged == True %}
+                <span class="badge bg-dark">FLAGGED</span>
+            {% else %}
+            <div class="card-footer text-end">
+                <a href='{{url_for('sponsor_request_form', campaign_id=campaign.campaign_id, name=campaign.title)}}' class="btn btn-primary">Request</a>
+            </div>
+            {% endif %}
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'Sponsors/s_base.html' %}
+
+{% block title%}My Requests{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/i_my_req.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    <!-- My Requests -->
+    <div class="container mt-5 p-0">
+        <section class="welcome p-6">
+			{% if requests|length == 0 %}
+			<div class="text-center alert alert-danger" role="alert" style=" animation: pulse 1s infinite">
+				No Requests Found
+			</div>
+			{% else %}
+            <h1 class="text-center mt-5 p-0 m-0" style="color: black; font-family: ROBOTO; text-decoration: underline"><b>My Requests</b></h1>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+             <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+				<div class="my_requests mt-3">
+					{% for request in requests %}
+					<div class="request">
+						<div class="request-details">
+							<div class="detail">
+								<span>Request Title:</span>
+								<span>{{ request.title }}</span>
+							</div>
+							<div class="detail">
+								<span>Description:</span>
+								<span>{{ request.description }}</span>
+							</div>
+							<div class="detail">
+								<span>Budget:</span>
+								<span>{{ request.amount }}</span>
+							</div>
+							<div class="detail">
+								<span>Status:</span>
+								{% if request.status.name == 'PENDING' %}
+   									<span style="color: gray;"><b>PENDING</b></span>
+								{% elif request.status.name == 'ACCEPTED' %}
+    								<span style="color: #0d6efd;"><b>ACCEPTED</b></span>
+								{% elif request.status.name == 'COMPLETED' %}
+									<span style="color: green;"><b>COMPLETED</b></span>
+								{% else %}
+    								<span style="color: red;"><b>REJECTED</b></span>
+								{% endif %}
+
+							</div>
+							<div class="detail">
+								<span>Campaign Name:</span>
+								<span><b>{{ request.campaign.title }}</b></span>
+							</div>
+							<div class="detail">
+								<span>Campaign Niche:</span>
+								<span>{{ request.campaign.niche }}</span>
+							</div>
+							{% if request.campaign.status.name == 'INACTIVE' %}
+								<span class="badge bg-dark">INACTIVE</span>
+							{% elif request.sender.flagged == True or request.campaign.flagged == True %}
+                                <span class="badge bg-dark">BLOCKED</span>
+                            {% else %}
+                            <div class="detail mt-3">
+                                <a href="{{ url_for('s_delete_request', request_id=request.request_id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this request?');">Delete</a>
+								{% if request.status.name == 'ACCEPTED' %}
+                                <a href="{{ url_for('s_my_requests_complete', request_id=request.request_id) }}" class="btn btn-primary btn-sm">Mark Complete</a>
+								{% elif request.status.name == 'PENDING' %}
+								<a href="{{ url_for('s_edit_request', request_id=request.request_id) }}" class="btn btn-primary btn-sm" style='background-color: black;'>Edit</a>
+								{% endif %}
+                            </div>
+							{% endif %}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

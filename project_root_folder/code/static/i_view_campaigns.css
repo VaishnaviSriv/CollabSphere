@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(196, 125, 191);
+    padding-top: 56px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+.dashboard-container {
+    padding: 20px;
+}
+.welcome-row h1 {
+    color: #343a40;
+    font-style: oblique;
+    font-size: 35px;
+}
+.no-campaigns {
+    color: #6c757d;
+    font-size: 40px;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    color: #dc3545;
+}
+.card-text {
+    font-weight: bold;
+    color: #495057;
+}
+.btn-success, .btn-danger {
+    font-size: 14px;
+}

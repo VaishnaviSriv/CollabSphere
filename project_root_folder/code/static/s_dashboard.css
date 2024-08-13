@@ -1,0 +1,143 @@
+body {
+    background-color: rgb(196, 125, 191);
+    padding-top: 56px;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+.dashboard-container {
+    padding-left: 0;
+}
+
+.welcome-row {
+    margin-left: 0;
+    padding-left: 5px;
+}
+
+.request-box {
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    max-width: 300px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .accept {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .reject {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .view {
+    background-color: #73746c;
+    color: white;
+  }
+
+  .request-box-wrapper {
+  padding: 5px; /* Reduced from 10px */
+  width: 33.33%;
+  float: left;
+  box-sizing: border-box;
+}
+
+.request-box {
+  margin: 0;
+  height: 100%;
+  border: 2px solid #ccc; /* Add a border for better visibility */
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+@media (max-width: 768px) {
+  .request-box-wrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .request-box-wrapper {
+    width: 100%;
+  }
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Reduce vertical spacing between sections */
+.container {
+  margin-top: 15px; /* Reduced from mt-4 (1.5rem) */
+}
+
+/* Remove extra margin from headings */
+h2 {
+  margin-bottom: 10px;
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 2px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: horizontal /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+  
+  /* Style the submit button with a specific background color etc */
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* When moving the mouse over the submit button, add a darker green color */
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  .card-custom {
+    background-color: #f8f9fa; /* Set the background color of the card */
+    border: 1px solid #dee2e6; /* Add a border to the card */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
+    padding: 1.5rem; /* Add some padding to the card content */
+}

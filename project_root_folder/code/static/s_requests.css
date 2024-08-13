@@ -1,0 +1,20 @@
+.leftside,.rightside{
+    height: 100vh;  
+    width: 100%;
+}
+
+.leftside {
+    background-color: rgb(72, 151, 231);
+    padding: 20px;
+    margin: 0%;
+}
+
+.rightside {
+    background-color: rgb(140, 225, 229);
+    padding: 20px;
+    margin: 0%;
+}
+
+.leftside h2 {
+    margin-bottom: 15px;
+}

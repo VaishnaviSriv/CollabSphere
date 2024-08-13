@@ -1,0 +1,49 @@
+{% extends 'Influencers/i_base.html' %}
+
+{% block title%}Influencer Dashboard{% endblock %}
+
+{% block name%}Influencer{% endblock %}
+
+{% block sphere%}CollabSphere{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <section class="welcome">
+            <div class="profile-page">
+                <h2 class="profile-name"><b style="color: rgb(11, 10, 12);">Welcome {{influencer.name}}</b></h2>
+                <p class="profile-ranking fw-semibold">Portfolio Value: {{score}}k</p>
+                <div class="profile-details-frame ">
+                    <div class="profile-details fw-semibold">
+                        <div class="detail">
+                            <span class="detail-title fw-bold">Email:</span>
+                            <span class="detail-value">{{influencer.email}}</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-title fw-bold">Joining Date:</span>
+                            <span class="detail-value">{{date}}</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-title  fw-bold">Niche:</span>
+                            <span class="detail-value">{{influencer.niche}}</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-title fw-bold">Reach:</span>
+                            <span class="detail-value">{{influencer.reach}}</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-title fw-bold">Platform:</span>
+                            <span class="detail-value">{{influencer.platform}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+             <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </section>           
+    </div>
+{% endblock %}

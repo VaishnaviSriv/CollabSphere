@@ -1,0 +1,56 @@
+{% extends 'Sponsors/s_base.html' %}
+
+{% block title %}Search Influencers{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/search_inf.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="container mt-5 p-0">
+        <section class="welcome p-6">
+           {% if results %}
+            <h2>Search Results for "<b style="color: rgb(231, 227, 239);"> {{query}} </b>"</h2>
+            <div class="search-results mt-3">
+                {% for influencer in results %}
+                <div class="influencer">
+                    <div class="influencer-details fw-bold">
+                        <div class="detail">
+                            <span id="R">Name:</span>
+                            <span>{{influencer.name}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Niche:</span>
+                            <span>{{influencer.niche}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Platform:</span>
+                            <span>{{influencer.platform}}</span>
+                        </div>
+                        <div class="detail">
+                            <span id="R">Reach:</span>
+                            <span>{{influencer.reach}}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <hr>
+            </div>
+            {% else %}
+            <!-- Display message when no influencers are found -->
+            <div class="alert-text alert-warning text-center mt-4" role="alert">
+                <strong>No influencers found matching "{{ query }}"</strong>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

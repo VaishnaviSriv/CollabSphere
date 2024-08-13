@@ -1,0 +1,74 @@
+ {% extends "Sponsors/s_base.html" %}
+
+ {% block title%}Sponsor Profile{% endblock %}
+
+{% block css%}<link rel="stylesheet" href="/static/s_profile.css">{% endblock %}
+
+{% block name%}CollabSphere{% endblock %}
+
+{% block sphere%}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mb-3" style="color: rgb(4, 4, 4); font-family: 'roboto'; font-weight: bolder; text-decoration: underline">Personal Info</h1>
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" action="{{url_for('sponsor_edit_profile')}}">
+            <div class="container-profile bg-white p-5 shadow rounded">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-3 mb-5 mb-md-0 text-center">
+                        <img src="{{ url_for('static', filename='images/uploads/' + current_user.image)}}?v={{ range(1, 10000) | random }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                        <h6 class="mt-2">Upload a different photo</h6>
+                        <input type="file" name ="image" accept="image/*" class="form-control mt-3">
+                        <button type="submit" name="remove_image" value="true" class="btn btn-danger mt-3">Remove Picture</button>
+                    </div>
+                    <!-- edit form column -->
+                    <div class="col-md-9 personal-info">
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label" style="font-size: 18px;"><b>Name:</b></label> 
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" name="name" value='{{current_user.name}}' readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label" style="font-size: 18px;"><b>Email:</b></label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" name="email" value='{{current_user.email}}'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label" style="font-size: 18px;"><b>Role:</b></label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" name="email" value='SPONSOR' readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label" style="font-size: 18px;"><b>Joining Date:</b></label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="text" name="email" value='{{date}}' readonly>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
+                                <label class="col-lg-3 col-form-label" style="font-size: 18px;"><b>Current Password:</b></label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="password" name="password" value='{{current_user.password_hash}}' readonly>
+                                </div>
+                            </div> -->
+                            <div class="form-group row mt-4">
+                                <div class="col-lg-12 text-end">
+                                    <button class="btn btn-dark" type="submit">Update</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}  
+        </form>
+    </div>
+{% endblock %}
