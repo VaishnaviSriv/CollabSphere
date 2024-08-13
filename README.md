@@ -31,3 +31,5 @@ To run CollabSphere locally on your machine, follow these steps:
    ```
    flask run
    ```
+6. Access the CollabSphere web application by opening a web browser and navigating to `http://localhost:5000`.
+
